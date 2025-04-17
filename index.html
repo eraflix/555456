@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Stream Hijack</title>
+  <script>
+    window.onload = async () => {
+      const body = {
+        "file": "~97cCn3tbjWJEqWk$fPqb8LmpSVoZOmQT+Iu3oa0L7OyoZP$wgIxtHDht+xTPPt8rxZuntvBBow1HT3E8BcaXXHGa4uNGOj3gJK0jyFEhUb8$MFUjIDLYvFyczjV+3IYNB1jDs4NrVhoymOAQcpeAiX7pKTMKRDC3GeOSLcfAPFIVwkdIvVyaFBWz$a5qjpUTbhN3xY8M7KGgWoFJcvzuPVJ63FAWeuVUIb4uRaVmNCO-w7B5OinyzozCNmVtNHyly-SzoiPde-i+T+pbkq$7kIRL8CY4DowKBhm3Rf1$ZD0!",
+        "key": "1n7$kXh0BM$9B0mat1-WNVrUrOftMTwn+EUT7I4CITvLbiYI7EWiueZ7u4B887Fk"
+      };
+
+      try {
+        const response = await fetch('https://hindi.rgshows.me/api/v1/getStream', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(body)
+        });
+
+        const result = await response.json();
+
+        if (result.success && result.data?.link) {
+          const finalUrl = `http://hlsforge.com/?url=${encodeURIComponent(result.data.link)}`;
+          window.location.href = finalUrl;
+        } else {
+          document.body.innerHTML = '❌ Failed to grab stream link. Rethink your life.';
+        }
+      } catch (err) {
+        document.body.innerHTML = `💥 Error: ${err.message}`;
+      }
+    };
+  </script>
+</head>
+<body>
+  <h1>🔗 Loading stream... Hold your damn horses.</h1>
+</body>
+</html>
